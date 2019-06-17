@@ -5,7 +5,7 @@ import org.dleve123.essentialscala.UnitSpec
 class TreeSpec extends UnitSpec {
   describe("#fold") {
     it("returns a string representation of a Tree") {
-      val tree: Tree =
+      val tree: Tree[String] =
         Node(
           Node(
             Leaf("To"), Leaf("iterate")
@@ -24,7 +24,7 @@ class TreeSpec extends UnitSpec {
           )
         )
 
-      assert(tree.fold == "To iterate is human, to recurse divine")
+      assert(tree.fold((left: String, right: String) => left + " " + right) == "To iterate is human, to recurse divine")
     }
   }
 }
