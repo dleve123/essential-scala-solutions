@@ -8,11 +8,7 @@ sealed trait IntList {
       case IntPair(hd, tl) => f(hd, tl.fold(end, f))
     }
 
-  def length: Int =
-    this match {
-      case IntEnd => 0
-      case IntPair(hd, tl) => 1 + tl.length
-    }
+  def length: Int = fold(0, (head, tail) => 1 + tail)
 
   def double: IntList =
     this match {
