@@ -26,7 +26,7 @@ sealed trait IntList {
       case IntPair(hd, tl) => hd * tl.product
     }
 
-  def sum: Int = fold(0, (x: Int, y: Int) => x + y)
+  def sum: Int = fold(0, (head, tail) => head + tail)
 }
 
 case object IntEnd extends IntList
