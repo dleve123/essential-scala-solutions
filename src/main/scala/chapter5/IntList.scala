@@ -16,11 +16,7 @@ sealed trait IntList {
       case IntPair(hd, tl) => IntPair(hd * 2, tl.double)
     }
 
-  def product: Int =
-    this match {
-      case IntEnd => 1
-      case IntPair(hd, tl) => hd * tl.product
-    }
+  def product: Int = fold(1, (head, tail) => head * tail)
 
   def sum: Int = fold(0, (head, tail) => head + tail)
 }
