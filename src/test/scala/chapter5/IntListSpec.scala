@@ -43,19 +43,19 @@ class IntListSpec extends UnitSpec {
 
       assert(example.product == 12)
     }
+  }
 
-    describe("#double") {
-      it("returns the empty list when the empty list is given") {
-        val example = IntEnd
+  describe("#double") {
+    it("returns the empty list when the empty list is given") {
+      val example = IntEnd
 
-        assert(example.double == IntEnd)
-      }
+      assert(example.double == IntEnd)
+    }
 
-      it("returns the InList with every IntPair doubled") {
-        val example = IntPair(2, IntPair(2, IntPair(3, IntEnd)))
+    it("returns the InList with every IntPair doubled") {
+      val example = IntPair(2, IntPair(2, IntPair(3, IntEnd)))
 
-        assert(example.double == IntPair(4, IntPair(4, IntPair(6, IntEnd))))
-      }
+      assert(example.double == IntPair(4, IntPair(4, IntPair(6, IntEnd))))
     }
   }
 }
