@@ -30,4 +30,18 @@ class IntListSpec extends UnitSpec {
       assert(example.length == 3)
     }
   }
+
+  describe("#product") {
+    it("returns 1 for an empty IntList") {
+      val example = IntEnd
+
+      assert(example.product == 1)
+    }
+
+    it("returns the arithmetic product of all elements in the list") {
+      val example = IntPair(2, IntPair(2, IntPair(3, IntEnd)))
+
+      assert(example.product == 12)
+    }
+  }
 }
