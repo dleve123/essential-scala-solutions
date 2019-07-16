@@ -48,4 +48,14 @@ class LinkedListSpec extends UnitSpec {
       assert(example(3) == Failure("Index out of bounds"))
     }
   }
+
+  describe("maps") {
+    it("can map stuff") {
+      val example: LinkedList[Int] = Pair(1, Pair(2, Pair(3, End())))
+
+      val actual = example.map( _ * 2)
+
+      assert(actual == Pair(2, Pair(4, Pair(6, End()))))
+    }
+  }
 }
