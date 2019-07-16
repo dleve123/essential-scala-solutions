@@ -8,6 +8,13 @@ sealed trait Maybe[A] {
     }
   }
 
+  def flatMap[B](fn: A => Maybe[B]): Maybe[B] = {
+    this match {
+      case Full(value) => fn(value)
+      case Empty() => Empty[B]()
+    }
+  }
+
   def map[B](fn: A => B): Maybe[B] = {
     this match {
       case Full(value) => Full(fn(value))
