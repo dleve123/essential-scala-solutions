@@ -4,3 +4,5 @@
 # Ignore target directories
 # https://www.scala-sbt.org/1.0/docs/Directories.html#Configuring+version+control
 target/
+
+.DS_Store
