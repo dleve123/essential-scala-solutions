@@ -1,13 +1,18 @@
 package chapter5
 
-sealed trait LinkedList[A] {
+sealed trait Result[A]
 
+case class Success[A](result: A) extends Result[A]
+case class Failure[A](result: String) extends Result[A]
+
+sealed trait LinkedList[A] {
   def map[B](fn: A => B):LinkedList[B] = {
     this match {
       case Pair(head, tail) => Pair(fn(head), tail.map(fn))
       case End() => End[B]()
     }
   }
+
   def length(): Int = {
     this match {
       case End() => 0
