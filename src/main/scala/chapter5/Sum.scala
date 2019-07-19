@@ -1,20 +1,27 @@
 package chapter5
 
 sealed trait Sum[A,B] {
+  def fold[C](failure: A => C, success: B => C): C = {
+    this match {
+      case Failure(value) => failure(value)
+      case Success(value) => success(value)
+    }
+  }
 
   def map[C](fn: B => C): Sum[A, C] = {
     this match {
-      case Right(value) => Right[A,C](fn(value))
-      case Left(value) => Left[A,C](value)
+      case Success(value) => Success[A,C](fn(value))
+      case Failure(value) => Failure[A,C](value)
     }
   }
-  def fold[C](left: A => C, right: B => C): C = {
+
+  def flatMap[C](fn: B => Sum[A,C]): Sum[A,C] = {
     this match {
-      case Left(value) => left(value)
-      case Right(value) => right(value)
+      case Success(value) => fn(value)
+      case Failure(value) => Failure(value)
     }
   }
 }
 
-final case class Left[A,B](value: A) extends Sum[A,B]
-final case class Right[A,B](value: B) extends Sum[A,B]
+final case class Failure[A,B](value: A) extends Sum[A,B]
+final case class Success[A,B](value: B) extends Sum[A,B]

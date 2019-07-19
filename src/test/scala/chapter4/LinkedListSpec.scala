@@ -1,4 +1,4 @@
-package chapter5
+package chapter4
 
 import org.dleve123.essentialscala.UnitSpec
 
