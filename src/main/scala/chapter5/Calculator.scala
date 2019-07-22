@@ -3,9 +3,6 @@ package chapter5
 sealed trait Expression {
   def eval: Sum[String, Double] = {
     this match {
-      case Addition(left: Number, right: Number) => {
-        Success(left.value + right.value)
-      }
       case Addition(left: Expression, right: Expression) => {
         left.eval.flatMap( l =>
           right.eval.flatMap( r =>
@@ -20,6 +17,7 @@ sealed trait Expression {
          Success(Math.sqrt(number.value))
         }
       }
+      case Number(value) => Success(value)
     }
   }
 }
