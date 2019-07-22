@@ -35,10 +35,15 @@ class CalculatorSpec extends UnitSpec {
       }
     }
 
-    it("returns the sqrt of a non-negative number") {
-      val evaluation = SquareRoot(Number(4)).eval
+    describe("division") {
+      it("returns a failure when right side is 0") {
+        val evalution = Division(Number(4), Number(0)).eval
 
-      assert(evaluation == Success(2))
+        assert(evalution == Failure("Division by zero"))
+      }
+      it("returns result of the division of 2 numbers") {
+        pending
+      }
     }
   }
 }

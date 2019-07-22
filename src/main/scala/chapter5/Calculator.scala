@@ -17,6 +17,13 @@ sealed trait Expression {
          Success(Math.sqrt(number.value))
         }
       }
+      case Division(left: Number, right: Number) => {
+       if (right.value == 0) {
+         Failure("Division by zero")
+       } else {
+         Success(4)
+       }
+      }
       case Number(value) => Success(value)
     }
   }
