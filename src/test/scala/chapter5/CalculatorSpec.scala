@@ -47,6 +47,14 @@ class CalculatorSpec extends UnitSpec {
 
         assert(evaluation == Success(2.5))
       }
+
+      it("can divide expressions built from additions") {
+        val evaluation = Division(
+          Addition(Number(3), Number(2)),
+          Number(2)
+        ).eval
+
+        assert(evaluation == Success(2.5))
       }
     }
   }

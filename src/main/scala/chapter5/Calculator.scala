@@ -17,11 +17,15 @@ sealed trait Expression {
          Success(Math.sqrt(number.value))
         }
       }
-      case Division(left: Number, right: Number) => {
-       if (right.value == 0) {
+      case Division(left: Expression, right: Expression) => {
+       if (right.eval == Success(0)) {
          Failure("Division by zero")
        } else {
-         Success(left.value / right.value)
+         left.eval.flatMap ( l =>
+           right.eval.flatMap( r =>
+             Success(l/r)
+           )
+         )
        }
       }
       case Number(value) => Success(value)
