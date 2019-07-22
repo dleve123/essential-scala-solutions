@@ -10,11 +10,13 @@ sealed trait Expression {
           )
         )
       }
-      case SquareRoot(number: Number) => {
-        if(number.value < 0) {
-         Failure("square root of negative number")
-        } else {
-         Success(Math.sqrt(number.value))
+      case SquareRoot(expression: Expression) => {
+        expression.eval flatMap { e =>
+          if(e < 0) {
+            Failure("square root of negative number")
+          } else {
+            Success(Math.sqrt(e))
+          }
         }
       }
       case Division(left: Expression, right: Expression) => {

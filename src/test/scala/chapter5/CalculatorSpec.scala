@@ -33,6 +33,16 @@ class CalculatorSpec extends UnitSpec {
 
         assert(evaluation == Success(2))
       }
+
+      it("allows for the sqrt of expressions") {
+        val evaluation = SquareRoot(
+          Addition(
+            Number(3), Number(1)
+          )
+        ).eval
+
+        assert(evaluation == Success(2))
+      }
     }
 
     describe("division") {
