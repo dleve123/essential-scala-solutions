@@ -3,7 +3,7 @@ package chapter5
 sealed trait Expression {
   def eval: Sum[String, Double] = {
     this match {
-      case Addition(left: Expression, right: Expression) => {
+      case Addition(left, right) => {
         left.eval.flatMap( l =>
           right.eval.flatMap( r =>
             Success(l+r)
@@ -17,7 +17,7 @@ sealed trait Expression {
           }
         }
       }
-      case SquareRoot(expression: Expression) => {
+      case SquareRoot(expression) => {
         expression.eval flatMap { e =>
           if(e < 0) {
             Failure("square root of negative number")
@@ -26,7 +26,7 @@ sealed trait Expression {
           }
         }
       }
-      case Division(left: Expression, right: Expression) => {
+      case Division(left, right) => {
          left.eval.flatMap ( l =>
            right.eval.flatMap( r => {
              if (r == 0) {
