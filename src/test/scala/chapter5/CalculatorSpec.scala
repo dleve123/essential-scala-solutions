@@ -37,15 +37,15 @@ class CalculatorSpec extends UnitSpec {
 
     describe("division") {
       it("returns a failure when right side is 0") {
-        val evalution = Division(Number(4), Number(0)).eval
+        val evaluation = Division(Number(4), Number(0)).eval
 
-        assert(evalution == Failure("Division by zero"))
+        assert(evaluation == Failure("Division by zero"))
       }
 
       it("returns result of the division of 2 numbers") {
-        val evalution = Division(Number(5), Number(2)).eval
+        val evaluation = Division(Number(5), Number(2)).eval
 
-        assert(evalution == Success(2.5))
+        assert(evaluation == Success(2.5))
       }
       }
     }
