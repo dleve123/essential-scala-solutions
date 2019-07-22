@@ -20,15 +20,15 @@ sealed trait Expression {
         }
       }
       case Division(left: Expression, right: Expression) => {
-       if (right.eval == Success(0)) {
-         Failure("Division by zero")
-       } else {
          left.eval.flatMap ( l =>
-           right.eval.flatMap( r =>
-             Success(l/r)
-           )
+           right.eval.flatMap( r => {
+             if (r == 0) {
+               Failure("Division by zero")
+             } else {
+               Success(l / r)
+             }
+           })
          )
-       }
       }
       case Number(value) => Success(value)
     }
