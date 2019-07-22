@@ -4,18 +4,10 @@ sealed trait Expression {
   def eval: Sum[String, Double] = {
     this match {
       case Addition(left, right) => {
-        left.eval.flatMap { l =>
-          right.eval.flatMap { r =>
-            Success(l+r)
-          }
-        }
+        resolveExpression(left, right, { _ + _ })
       }
       case Subtraction(left, right) => {
-        left.eval flatMap { l =>
-          right.eval flatMap { r =>
-            Success(l-r)
-          }
-        }
+        resolveExpression(left, right, { _ - _})
       }
       case SquareRoot(expression) => {
         expression.eval flatMap { e =>
@@ -38,6 +30,20 @@ sealed trait Expression {
         }
       }
       case Number(value) => Success(value)
+    }
+  }
+
+  def resolveExpression(
+    left: Expression,
+    right: Expression,
+    fn: (Double, Double) => Double
+  ): Sum[String, Double] = {
+    left.eval.flatMap { l =>
+      right.eval.flatMap { r =>
+        Success(
+          fn(l, r)
+        )
+      }
     }
   }
 }
