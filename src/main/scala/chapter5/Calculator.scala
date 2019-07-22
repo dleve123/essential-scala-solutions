@@ -6,6 +6,13 @@ sealed trait Expression {
       case Addition(left: Number, right: Number) => {
         Success(left.value + right.value)
       }
+      case Addition(left: Expression, right: Expression) => {
+        left.eval.flatMap( l =>
+          right.eval.flatMap( r =>
+            Success(l+r)
+          )
+        )
+      }
       case SquareRoot(number: Number) => {
         if(number.value < 0) {
          Failure("square root of negative number")

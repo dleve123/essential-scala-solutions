@@ -10,6 +10,16 @@ class CalculatorSpec extends UnitSpec {
 
         assert(evaluation == Success(3))
       }
+
+      it("can evaluate the addition of additions") {
+        val evaluation =
+        Addition(
+          Addition(Number(1),Number(2)),
+          Addition(Number(3),Number(4))
+        ).eval
+
+        assert(evaluation == Success(10))
+      }
     }
     it("returns a failure when sqrt-ing negative numbers") {
       val evaluation = SquareRoot(Number(-1)).eval
