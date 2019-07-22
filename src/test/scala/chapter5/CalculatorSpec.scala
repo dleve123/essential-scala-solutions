@@ -21,10 +21,18 @@ class CalculatorSpec extends UnitSpec {
         assert(evaluation == Success(10))
       }
     }
-    it("returns a failure when sqrt-ing negative numbers") {
-      val evaluation = SquareRoot(Number(-1)).eval
+    describe("square rooting") {
+      it("returns a failure when sqrt-ing negative numbers") {
+        val evaluation = SquareRoot(Number(-1)).eval
 
-      assert(evaluation == Failure("square root of negative number"))
+        assert(evaluation == Failure("square root of negative number"))
+      }
+
+      it("returns the sqrt of a non-negative number") {
+        val evaluation = SquareRoot(Number(4)).eval
+
+        assert(evaluation == Success(2))
+      }
     }
 
     it("returns the sqrt of a non-negative number") {
