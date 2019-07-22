@@ -41,8 +41,12 @@ class CalculatorSpec extends UnitSpec {
 
         assert(evalution == Failure("Division by zero"))
       }
+
       it("returns result of the division of 2 numbers") {
-        pending
+        val evalution = Division(Number(5), Number(2)).eval
+
+        assert(evalution == Success(2.5))
+      }
       }
     }
   }

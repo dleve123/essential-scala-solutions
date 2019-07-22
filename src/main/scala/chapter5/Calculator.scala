@@ -21,7 +21,7 @@ sealed trait Expression {
        if (right.value == 0) {
          Failure("Division by zero")
        } else {
-         Success(4)
+         Success(left.value / right.value)
        }
       }
       case Number(value) => Success(value)
