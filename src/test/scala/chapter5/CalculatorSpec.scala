@@ -83,5 +83,32 @@ class CalculatorSpec extends UnitSpec {
         assert(evaluation == Success(-1))
       }
     }
+
+    describe("failure dynamics") {
+      it("bubbles up failures from child expressions first") {
+        val evaluation = Division(
+          SquareRoot(Number(-9)),
+          Number(0)
+        ).eval
+
+        assert(
+          evaluation == Failure("square root of negative number")
+        )
+      }
+    }
+
+    describe("all expressions together") {
+      it("works") {
+        val evaluation = Division(
+          Addition(
+            Subtraction(Number(8), Number(6)),
+            Number(2)
+          ),
+          Number(2)
+        ).eval
+
+        assert(evaluation == Success(2.0))
+      }
+    }
   }
 }
