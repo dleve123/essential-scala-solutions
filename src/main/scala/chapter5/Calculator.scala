@@ -4,11 +4,11 @@ sealed trait Expression {
   def eval: Sum[String, Double] = {
     this match {
       case Addition(left, right) => {
-        left.eval.flatMap( l =>
-          right.eval.flatMap( r =>
+        left.eval.flatMap { l =>
+          right.eval.flatMap { r =>
             Success(l+r)
-          )
-        )
+          }
+        }
       }
       case Subtraction(left, right) => {
         left.eval flatMap { l =>
@@ -27,15 +27,15 @@ sealed trait Expression {
         }
       }
       case Division(left, right) => {
-         left.eval.flatMap ( l =>
-           right.eval.flatMap( r => {
-             if (r == 0) {
-               Failure("Division by zero")
-             } else {
-               Success(l / r)
-             }
-           })
-         )
+        left.eval flatMap { l =>
+          right.eval flatMap { r =>
+            if (r == 0) {
+              Failure("Division by zero")
+            } else {
+              Success(l / r)
+            }
+          }
+        }
       }
       case Number(value) => Success(value)
     }
