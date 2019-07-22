@@ -10,6 +10,13 @@ sealed trait Expression {
           )
         )
       }
+      case Subtraction(left, right) => {
+        left.eval flatMap { l =>
+          right.eval flatMap { r =>
+            Success(l-r)
+          }
+        }
+      }
       case SquareRoot(expression: Expression) => {
         expression.eval flatMap { e =>
           if(e < 0) {

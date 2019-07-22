@@ -67,5 +67,21 @@ class CalculatorSpec extends UnitSpec {
         assert(evaluation == Success(2.5))
       }
     }
+
+    describe("subtraction") {
+      it("returns the subtraction of 2 numbers") {
+        val evaluation = Subtraction(Number(2), Number(3)).eval
+
+        assert(evaluation == Success(-1))
+      }
+
+      it("can subtraction expressions") {
+        val evaluation = Subtraction(
+          Number(2), SquareRoot(Number(9))
+        ).eval
+
+        assert(evaluation == Success(-1))
+      }
+    }
   }
 }
