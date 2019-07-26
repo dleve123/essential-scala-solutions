@@ -12,7 +12,7 @@ sealed trait Expression {
       case SquareRoot(expression) => {
         expression.eval flatMap { e =>
           if(e < 0) {
-            Failure("square root of negative number")
+            Failure(s"square root of negative number: $e")
           } else {
             Success(Math.sqrt(e))
           }
